@@ -1,0 +1,127 @@
+/* --- about_style.css --- */
+
+/* 초기화 및 커서 */
+* { 
+    margin: 0; padding: 0; box-sizing: border-box; 
+    cursor: url('images/cusor.png'), auto;
+}
+
+body {
+    background-color: #f0f0f0;
+    display: flex; justify-content: center; align-items: center;
+    min-height: 100vh; overflow: hidden;
+}
+
+/* ⭐ 페이지 전체 사이즈 고정 및 배경 가두기 */
+.wrap {
+    width: 1920px; height: 900px;
+    position: relative; overflow: hidden;
+    background-color: #fff;
+}
+
+.bg-img { position: absolute; top: 0; left: 0; z-index: 0; }
+
+/* ❌ sub-content 관련 스타일 삭제됨 */
+
+
+/* =========================================
+   ⭐ [위치 수정 구역] 토끼와 펜의 새 위치를 잡아주세요 
+   ========================================= */
+
+/* 1. 토끼 (rabbit-about) 위치 */
+.rabbit-about {
+    position: absolute;
+    /* 👇 여기 숫자를 바꿔서 시안에 맞는 위치를 잡아주세요! */
+    top: 681px;  
+    left: 245px; 
+    z-index: 7;
+    animation: floatEffect 3s ease-in-out infinite;
+}
+
+/* 2. 펜 (pen-about) 위치 */
+.pen-about {
+    position: absolute;
+    /* 👇 여기 숫자를 바꿔서 시안에 맞는 위치를 잡아주세요! */
+    top: 158px; 
+    left: 1628px; 
+    z-index: 8;
+    animation: floatEffect 4s ease-in-out infinite;
+}
+
+/* 펜 흔들림 효과 */
+.pen img { animation: swingEffect 4s ease-in-out infinite; }
+.pen-about img { transform-origin: bottom right; animation-delay: -1s; }
+
+
+/* =========================================
+   이 아래는 기존과 동일합니다 (별, 하단버튼 등)
+   ========================================= */
+
+/* 별 공통 애니메이션 및 레이어 */
+.star {
+    position: absolute;
+    z-index: 99;
+    animation: floatEffect 4s ease-in-out infinite;
+}
+
+/* 별 개별 위치 (기존 유지) */
+.star-l1 { top: 692px; left: 149px; }
+.star-l2 { top: 449px; left: 249px; }
+.star-l3 { top: 725px; left: 675px; }
+.star-r1 { top: 422px; left: 1814px; }
+.star-r2 { top: 287px; left: 1852px; }
+
+.rotate-left { animation: spinL 15s linear infinite; }
+.rotate-right { animation: spinR 15s linear infinite; }
+
+/* 하단 버튼 7개 */
+.portfolio-nav {
+    position: absolute;
+    bottom: -8px; 
+    left: 968px;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 8px;
+    z-index: 100;
+}
+
+/* 버튼 효과 */
+.nav-btn-sub:hover {
+    transform: scale(1.05);
+    transition: 0.2s;
+    cursor: url('images/cursor_hover.png'), pointer !important;
+}
+
+.folder-nav {
+    position: absolute;
+    /* 위치 조정: 화면 왼쪽 상단에 배치합니다. */
+    top: 85px;   /* 위에서 얼마나 띄울지 */
+    left: 112px;  /* 왼쪽에서 얼마나 띄울지 */
+    display: flex;
+    flex-direction: column;
+    gap: 31px;   /* 버튼 사이의 간격 */
+    z-index: 150; /* 다른 요소들보다 위에 오도록 높게 설정 */
+}
+
+.folder-nav a img {
+    display: block;
+    transition: transform 0.3s; /* 부드러운 움직임 */
+}
+
+/* 마우스 올렸을 때 폴더가 쏙 올라오는 효과 */
+.folder-nav a:hover img {
+    transform: translateY(-10px); 
+    cursor: url('images/cursor_hover.png'), pointer !important;
+}
+
+/* 애니메이션 키프레임 */
+@keyframes floatEffect {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+}
+@keyframes spinL { from { transform: rotate(0deg); } to { transform: rotate(-360deg); } }
+@keyframes spinR { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+@keyframes swingEffect {
+    0%, 100% { transform: rotate(-2deg); }
+    50% { transform: rotate(2deg); }
+}
