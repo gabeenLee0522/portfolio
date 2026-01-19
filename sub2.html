@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>About Me - GaBeen Portfolio</title>
+    <style>
+        /* 1. 기본 초기화 및 레이아웃 */
+        * { 
+            margin: 0; padding: 0; box-sizing: border-box; 
+            /* 기본 커서 설정 */
+            cursor: url('images/cusor.png') 0 0, auto;
+        }
+
+        html, body {
+            width: 100%; height: 100%;
+            overflow: hidden;
+            background-color: #A0C6F5;
+        }
+
+        /* 2. 메인 스크롤 컨테이너 */
+        .main-wrapper {
+            display: flex;
+            width: 600%; 
+            height: 100vh;
+            transition: transform 0.8s cubic-bezier(0.65, 0, 0.35, 1);
+            will-change: transform;
+        }
+
+        section {
+            width: 100vw; height: 100vh;
+            flex-shrink: 0; position: relative; overflow: hidden;
+        }
+
+        section .wrap {
+            width: 1920px; height: 900px;
+            position: absolute; top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .bg-img { width: 100%; height: 100%; object-fit: cover; position: absolute; z-index: 1; }
+
+        /* 3. 공통 오브젝트 스타일 및 애니메이션 */
+        .character-rabbit { position: absolute; z-index: 7; animation: floatEffect 4s infinite; }
+        .pen { position: absolute; z-index: 8; animation: floatEffect 4s infinite; }
+        .star { position: absolute; z-index: 99; pointer-events: none; animation: floatEffect 4s infinite; }
+
+        @keyframes floatEffect { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
+        .rotate-left { animation: spinL 15s linear infinite; }
+        .rotate-right { animation: spinR 15s linear infinite; }
+        @keyframes spinL { from { transform: rotate(0deg); } to { transform: rotate(-360deg); } }
+        @keyframes spinR { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+        /* 4. 개별 배치 값 */
+        .pen-about { top: 165px; left: 1643px; }
+        .rabbit-about { top: 683px; left: 246px; }
+
+        /* 별 위치 */
+        .star-l1 { top: 692px; left: 149px; }
+        .star-l2 { top: 449px; left: 249px; }
+        .star-l3 { top: 725px; left: 675px; }
+        .star-r1 { top: 422px; left: 1814px; }
+        .star-r2 { top: 287px; left: 1852px; }
+
+        /* 5. 네비게이션 (통합 커서 효과 적용) */
+        .folder-nav {
+            position: fixed; top: 85px; left: 112px;
+            display: flex; flex-direction: column; gap: 31px; z-index: 150;
+        }
+
+        .portfolio-nav {
+            position: fixed;
+            bottom: 0; /* 바닥에 밀착 */
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex; gap: 8px;
+            z-index: 100;
+            padding-bottom: 10px; /* 시각적 10px 여백 유지 */
+            height: 80px; /* 인식 높이 확보 */
+            align-items: flex-end;
+        }
+
+        /* 🔥 모든 버튼에 호버 커서 및 인식 영역 확장 적용 */
+        .nav-btn-sub, .folder-nav a {
+            display: inline-flex;
+            position: relative;
+            transition: transform 0.2s;
+            text-decoration: none;
+            /* 인식 범위 확장 패딩 (상, 좌우, 하) */
+            padding: 15px 10px 40px 10px;
+            margin: -15px -10px -40px -10px;
+        }
+
+        .nav-btn-sub:hover, .folder-nav a:hover {
+            transform: scale(1.1);
+            /* 호버 시 커서 변경 */
+            cursor: url('images/cursor_hover.png') 0 0, pointer !important;
+        }
+
+        .nav-btn-sub img, .folder-nav img {
+            transition: 0.3s;
+            pointer-events: none; /* 이미지가 아닌 부모 박스가 마우스 이벤트를 받도록 */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="folder-nav">
+        <a href="index.html"><img src="images/home.png" alt="Home"></a>
+        <a href="sub.html"><img src="images/portfolio.png" alt="Portfolio"></a>
+        <a href="sub2.html"><img src="images/about me.png" alt="About Me"></a>
+    </div>
+
+    <div class="main-wrapper" id="master-container">
+        <script>
+            for (let i = 1; i <= 6; i++) {
+                const bgNum = i + 6; 
+                const bgFileName = bgNum < 10 ? `0${bgNum}` : bgNum;
+
+                document.write(`
+                    <section id="page${i}">
+                        <div class="wrap">
+                            <img src="images/bg_sub${bgFileName}.jpg" alt="배경${i}" class="bg-img">
+                            <div class="pen pen-about"><img src="images/subpen2.png"></div>
+                            <div class="character-rabbit rabbit-about"><img src="images/subrabbit2.png"></div>
+                            <div class="star star-l1"><img src="images/star1.png" class="rotate-left"></div>
+                            <div class="star star-l2"><img src="images/star2.png" class="rotate-left"></div>
+                            <div class="star star-l3"><img src="images/star3.png" class="rotate-left"></div>
+                            <div class="star star-r1"><img src="images/star4.png" class="rotate-right"></div>
+                            <div class="star star-r2"><img src="images/star5.png" class="rotate-right"></div>
+                        </div>
+                    </section>
+                `);
+            }
+        </script>
+    </div>
+
+    <div class="portfolio-nav" id="bottom-nav">
+        <a href="index.html" class="nav-btn-sub"><img src="images/btn_home.png" alt="홈"></a>
+        <a href="#" class="nav-btn-sub"><img src="images/btn4_sub1.png" id="nav-img-1"></a>
+        <a href="#" class="nav-btn-sub"><img src="images/btn3_sub2.png" id="nav-img-2"></a>
+        <a href="#" class="nav-btn-sub"><img src="images/btn3_sub3.png" id="nav-img-3"></a>
+        <a href="#" class="nav-btn-sub"><img src="images/btn3_sub4.png" id="nav-img-4"></a>
+        <a href="#" class="nav-btn-sub"><img src="images/btn3_sub5.png" id="nav-img-5"></a>
+        <a href="#" class="nav-btn-sub"><img src="images/btn3_sub6.png" id="nav-img-6"></a>
+    </div>
+
+    <script>
+        let currentIdx = 0;
+        const totalPages = 6;
+        const container = document.getElementById('master-container');
+        let isAnimating = false;
+
+        const activeImages = [
+            "images/btn4_sub1.png", "images/btn4_sub2.png", "images/btn4_sub3.png",
+            "images/btn4_sub4.png", "images/btn4_sub5.png", "images/btn4_sub6.png"
+        ];
+        const inactiveImages = [
+            "images/btn3_sub1.png", "images/btn3_sub2.png", "images/btn3_sub3.png",
+            "images/btn3_sub4.png", "images/btn3_sub5.png", "images/btn3_sub6.png"
+        ];
+
+        function updateScroll() {
+            isAnimating = true;
+            container.style.transform = `translateX(-${currentIdx * 100}vw)`;
+            
+            for(let i=1; i<=6; i++) {
+                const img = document.getElementById(`nav-img-${i}`);
+                if(img) {
+                    img.src = (i === currentIdx + 1) ? activeImages[i-1] : inactiveImages[i-1];
+                }
+            }
+            setTimeout(() => { isAnimating = false; }, 800);
+        }
+
+        window.addEventListener('wheel', (e) => {
+            if (isAnimating) return;
+            if (e.deltaY > 0) { if (currentIdx < totalPages - 1) currentIdx++; }
+            else { if (currentIdx > 0) currentIdx--; }
+            updateScroll();
+        }, { passive: false });
+
+        document.querySelectorAll('.nav-btn-sub').forEach((btn, index) => {
+            if(index > 0) {
+                btn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    currentIdx = index - 1;
+                    updateScroll();
+                });
+            }
+        });
+
+        window.onload = () => { updateScroll(); };
+    </script>
+</body>
+</html>
