@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+
+<html lang="ko">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <title>Portfolio Sub - GaBeen</title>
+
+    <style>
+        /* 1. 기본 초기화 */
+
+        * {
+
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+
+            cursor: url('images/cusor.png') 0 0, auto;
+
+        }
+
+
+
+        html,
+        body {
+
+            width: 100%;
+            height: 100%;
+
+            overflow: hidden;
+
+            background-color: #A0C6F5;
+
+        }
+
+
+
+        /* 2. 메인 스크롤 컨테이너 */
+
+        .main-wrapper {
+
+            display: flex;
+
+            width: 600%;
+
+            height: 100vh;
+
+            transition: transform 0.8s cubic-bezier(0.65, 0, 0.35, 1);
+
+            will-change: transform;
+
+        }
+
+
+
+        section {
+
+            width: 100vw;
+            height: 100vh;
+
+            flex-shrink: 0;
+            position: relative;
+            overflow: hidden;
+
+        }
+
+
+
+        section .wrap {
+
+            width: 1920px;
+            height: 900px;
+
+            position: absolute;
+            top: 50%;
+            left: 50%;
+
+            transform: translate(-50%, -50%);
+
+        }
+
+
+
+        .bg-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 0;
+        }
+
+
+
+        /* 3. 버튼 레이아웃 */
+
+        .sub-content {
+
+            position: absolute;
+            z-index: 10;
+            display: flex;
+
+            flex-direction: column;
+            top: 575px;
+            left: 580px;
+
+        }
+
+        .sub-content.type-detail-only {
+            top: 650px;
+        }
+
+
+
+        /* 4. 애니메이션 오브젝트 */
+
+        .character-rabbit,
+        .pen,
+        .star {
+            position: absolute;
+            animation: floatEffect 4s ease-in-out infinite;
+        }
+
+        .character-rabbit {
+            z-index: 7;
+            top: 662px;
+            left: 1632px;
+        }
+
+        .pen {
+            z-index: 8;
+            top: 182px;
+            left: 255px;
+        }
+
+        .star {
+            z-index: 99;
+            pointer-events: none;
+        }
+
+
+
+        /* 별 위치 */
+
+        .star-l1 {
+            top: 115px;
+            left: 370px;
+        }
+
+        .star-l2 {
+            top: 508px;
+            left: 328px;
+        }
+
+        .star-l3 {
+            top: 724px;
+            left: 894px;
+        }
+
+        .star-r1 {
+            top: 222px;
+            left: 1728px;
+        }
+
+        .star-r2 {
+            top: 344px;
+            left: 1834px;
+        }
+
+
+
+        @keyframes floatEffect {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-12px);
+            }
+        }
+
+        .rotate-left {
+            animation: spinL 15s linear infinite;
+        }
+
+        .rotate-right {
+            animation: spinR 15s linear infinite;
+        }
+
+        @keyframes spinL {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(-360deg);
+            }
+        }
+
+        @keyframes spinR {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+
+
+        /* 5. 네비게이션 (원래 위치 유지) */
+
+        .folder-nav {
+
+            position: fixed;
+            top: 85px;
+            left: 112px;
+
+            display: flex;
+            flex-direction: column;
+            gap: 0px;
+            z-index: 150;
+
+        }
+
+        .folder-nav a {
+            display: block;
+            padding: 10px;
+        }
+
+        /* 호버 영역 확장 */
+
+
+
+        .nav-bottom-wrapper {
+
+            position: relative;
+
+            bottom: 70px;
+            /* 원래 가빈 님이 설정하신 위치 */
+
+            left: 132px;
+
+            width: 100%;
+
+
+            pointer-events: none;
+
+            z-index: 100;
+
+        }
+
+
+
+        .portfolio-nav {
+
+            position: absolute;
+
+            display: flex;
+
+            gap: 8px;
+
+            width: max-content;
+
+            margin: 0 auto;
+
+            pointer-events: auto;
+
+        }
+
+
+
+        /* 🔥 핵심 수정: 클릭 및 커서 인식 영역 넓히기 */
+
+       
+
+
+        .btn-link:hover,
+
+        .btn-detail:hover,
+
+        .nav-btn-sub:hover,
+
+        .folder-nav a:hover {
+
+            transform: scale(1.05);
+
+            /* 커서 좌표 0 0 필수 */
+
+            cursor: url('images/cursor_hover.png') 0 0, pointer !important;
+
+        }
+
+
+
+        /* 이미지 자체는 패딩의 영향을 받지 않도록 설정 */
+
+        .nav-btn-sub img,
+        .btn-link img,
+        .btn-detail img,
+        .folder-nav a img {
+
+            pointer-events: none;
+            /* 이미지가 아닌 부모<a>가 이벤트를 받게 함 */
+
+        }
+    </style>
+
+</head>
+
+<body>
+
+
+
+    <div class="folder-nav">
+
+        <a href="index.html"><img src="images/home.png" alt="Home"></a>
+
+        <a href="sub.html"><img src="images/portfolio.png" alt="Portfolio"></a>
+
+        <a href="sub2.html"><img src="images/about me.png" alt="About Me"></a>
+
+    </div>
+
+
+
+    <div class="main-wrapper" id="master-container">
+
+        <script>
+
+            for (let i = 1; i <= 6; i++) {
+
+                const pageNum = i < 10 ? `0${i}` : i;
+
+                let buttonHtml = i === 1 ? `
+
+                    <a href="#" target="_blank" class="btn-link"><img src="images/btn_go_site.png"></a>
+
+                    <a href="#" class="btn-detail"><img src="images/btn_view_detail.png"></a>
+
+                ` : `
+
+                    <a href="#" class="btn-detail"><img src="images/btn_view_detail2.png"></a>
+
+                `;
+
+
+
+                document.write(`
+
+                    <section id="page${i}">
+
+                        <div class="wrap">
+
+                            <img src="images/bg_sub${pageNum}.jpg" class="bg-img">
+
+                            <div class="sub-content ${i === 1 ? '' : 'type-detail-only'}">${buttonHtml}</div>
+
+                            <div class="pen"><img src="images/subpen.png"></div>
+
+                            <div class="character-rabbit"><img src="images/subrabbit.png"></div>
+
+                            <div class="star star-l1"><img src="images/star1.png" class="rotate-left"></div>
+
+                            <div class="star star-l2"><img src="images/star2.png" class="rotate-left"></div>
+
+                            <div class="star star-l3"><img src="images/star3.png" class="rotate-left"></div>
+
+                            <div class="star star-r1"><img src="images/star4.png" class="rotate-right"></div>
+
+                            <div class="star star-r2"><img src="images/star5.png" class="rotate-right"></div>
+
+                        </div>
+
+                    </section>
+
+                `);
+
+            }
+
+        </script>
+
+    </div>
+
+
+
+    <div class="nav-bottom-wrapper">
+
+        <div class="portfolio-nav" id="bottom-nav">
+
+            <a href="index.html" class="nav-btn-sub"><img src="images/btn_home.png" alt="홈"></a>
+
+            <a href="#" class="nav-btn-sub"><img src="images/btn_sub1.png" id="nav-img-1"></a>
+
+            <a href="#" class="nav-btn-sub"><img src="images/btn_sub2.png" id="nav-img-2"></a>
+
+            <a href="#" class="nav-btn-sub"><img src="images/btn_sub3.png" id="nav-img-3"></a>
+
+            <a href="#" class="nav-btn-sub"><img src="images/btn_sub4.png" id="nav-img-4"></a>
+
+            <a href="#" class="nav-btn-sub"><img src="images/btn_sub5.png" id="nav-img-5"></a>
+
+            <a href="#" class="nav-btn-sub"><img src="images/btn_sub6.png" id="nav-img-6"></a>
+
+        </div>
+
+    </div>
+
+
+
+    <script>
+
+        let currentIdx = 0;
+
+        const totalPages = 6;
+
+        const masterContainer = document.getElementById('master-container');
+
+        let isAnimating = false;
+
+
+
+        const activeImages = ["images/btn2_sub1.png", "images/btn2_sub2.png", "images/btn2_sub3.png", "images/btn2_sub4.png", "images/btn2_sub5.png", "images/btn2_sub6.png"];
+
+        const inactiveImages = ["images/btn_sub1.png", "images/btn_sub2.png", "images/btn_sub3.png", "images/btn_sub4.png", "images/btn_sub5.png", "images/btn_sub6.png"];
+
+
+
+        function updateScroll() {
+
+            isAnimating = true;
+
+            masterContainer.style.transform = `translateX(-${currentIdx * 100}vw)`;
+
+            for (let i = 1; i <= 6; i++) {
+
+                const img = document.getElementById(`nav-img-${i}`);
+
+                if (img) img.src = (i === currentIdx + 1) ? activeImages[i - 1] : inactiveImages[i - 1];
+
+            }
+
+            setTimeout(() => { isAnimating = false; }, 800);
+
+        }
+
+
+
+        window.addEventListener('wheel', (e) => {
+
+            if (isAnimating) return;
+
+            if (e.deltaY > 0) { if (currentIdx < totalPages - 1) currentIdx++; }
+
+            else { if (currentIdx > 0) currentIdx--; }
+
+            updateScroll();
+
+        }, { passive: false });
+
+
+
+        document.querySelectorAll('.nav-btn-sub').forEach((btn, index) => {
+
+            if (index > 0) {
+
+                btn.addEventListener('click', (e) => {
+
+                    e.preventDefault();
+
+                    currentIdx = index - 1;
+
+                    updateScroll();
+
+                });
+
+            }
+
+        });
+
+        window.onload = updateScroll;
+
+    </script>
+
+</body>
+
+</html>
